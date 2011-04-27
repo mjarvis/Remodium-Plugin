@@ -1,0 +1,10 @@
+//
+// Prefix header for all source files of the 'Remodium' target in the 'Remodium' project.
+//
+
+#ifdef __OBJC__
+    #import <Cocoa/Cocoa.h>
+#endif
+
+#define DEPLOY 1
+#define REMODIUM_VERSION 1.2.2
