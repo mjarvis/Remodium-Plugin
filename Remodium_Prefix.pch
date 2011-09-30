@@ -7,4 +7,4 @@
 #endif
 
 #define DEPLOY 1
-#define REMODIUM_VERSION 1.2.2
+#define REMODIUM_VERSION 1.3

@@ -29,8 +29,8 @@
 	// Port Mapping
 	// Map the port.. we should really register for some notifications to make sure it forwards okay.
 	
-	[[TCMPortMapper sharedInstance] addPortMapping:[TCMPortMapping portMappingWithLocalPort:11300 
-																		desiredExternalPort:11300 
+	[[TCMPortMapper sharedInstance] addPortMapping:[TCMPortMapping portMappingWithLocalPort:[NPRemodium port] 
+																		desiredExternalPort:[NPRemodium port]
 																		  transportProtocol:TCMPortMappingTransportProtocolTCP
 																				   userInfo:nil]];
 	
@@ -48,6 +48,8 @@
 	[self statusDidChange:nil];
 
 	[NPRemodium publishToServer];
+	
+	[[adium contactAlertsController] registerActionID:@"Remodium" withHandler:self];
 	
 	/*{// Build our stuff!
 		// Build online contact list
@@ -79,12 +81,13 @@
 	
 	// Messages Received for PUSH
 	[notificationCenter addObserver:self selector:@selector(messageReceived:) name:CONTENT_MESSAGE_RECEIVED object:nil];
+	[notificationCenter addObserver:self selector:@selector(messageReceivedGroup:) name:CONTENT_MESSAGE_RECEIVED_GROUP object:nil];
 	
 	// Messages sent for Queue
 	[notificationCenter addObserver:self selector:@selector(messageSentFromAdium:) name:CONTENT_MESSAGE_SENT object:nil];
 	
 	[notificationCenter addObserver:self selector:@selector(statusDidChange:) name:AIStatusActiveStateChangedNotification object:nil];
-	[notificationCenter addObserver:self selector:@selector(statusDidChange:) name:AIStatusStateArrayChangedNotification object:nil];
+	[notificationCenter addObserver:self selector:@selector(statusArrayDidChange:) name:AIStatusStateArrayChangedNotification object:nil];
 	
 	// Messages from the socket
 	[notificationCenter addObserver:self selector:@selector(iPhoneAppDidOpen:) name:NPSocketConnectionDidOpenNotification object:nil];
@@ -118,7 +121,7 @@
 
 	[notificationCenter addObserver:self selector:@selector(contactStatusDidChange:) name:CONTACT_STATUS_IDLE_YES object:nil];
 	[notificationCenter addObserver:self selector:@selector(contactStatusDidChange:) name:CONTACT_STATUS_IDLE_NO object:nil];
-	 
+		 
 	// Messages
 	//[notificationCenter addObserver:self selector:@selector(messageSentFromAdium:) name:CONTENT_MESSAGE_SENT object:nil];
 	//[notificationCenter addObserver:self selector:@selector(messageReceived:) name:CONTENT_MESSAGE_RECEIVED object:nil];
@@ -137,12 +140,51 @@
 		NSLog(@"NP iPhone App did Close");
 }
 
+#pragma mark -
+#pragma mark Status
+
 - (void) statusDidChange: (id) sender
 {
+	NSLog(@"Status changed");
+	
 	if ([[[[adium statusController] activeStatusState] title] rangeOfString:@"Push" options:NSCaseInsensitiveSearch].location != NSNotFound)
 		push = YES;
 	else
 		push = NO;
+	
+	if (iPhoneAppIsOpen)
+	{
+		AIStatus *status = [[adium statusController] activeStatusState];
+		NSDictionary *dict = [NSDictionary dictionaryWithObjects:[NSArray arrayWithObjects:[status uniqueStatusID], [status title], [NSNumber numberWithInt:[status statusType]], nil]
+														 forKeys:[NSArray arrayWithObjects:@"ID", @"Title", @"Type", nil]];
+		
+		[messageQueueController.rootQueue addMessage:dict ofType:NPAStatusDidChange withRemoteStatus:iPhoneAppIsOpen skipQueue:NO];
+	}
+	
+}
+
+- (void) statusArrayDidChange: (id) sender
+{
+	NSLog(@"Status array changed");
+	
+	NSMutableSet *set = [[NSMutableSet alloc] initWithCapacity:[[[adium statusController] sortedFullStateArray] count]];
+	
+	for (AIStatus *status in [[adium statusController] sortedFullStateArray])
+	{
+		[set addObject:[NSDictionary dictionaryWithObjects:[NSArray arrayWithObjects:[status uniqueStatusID], [status title], [NSNumber numberWithInt:[status statusType]], nil]
+												   forKeys:[NSArray arrayWithObjects:@"ID", @"Title", @"Type", nil]]];
+	}
+	
+	[messageQueueController.rootQueue addMessage:[set autorelease]
+										  ofType:NPAStatusList
+								withRemoteStatus:iPhoneAppIsOpen
+									   skipQueue:NO];
+}
+
+- (void) changeStatus: (NSNumber *) statusUniqueID
+{
+	AIStatus *status = [adium.statusController statusStateWithUniqueStatusID:statusUniqueID];
+	[adium.statusController setActiveStatusState:status];
 }
 
 #pragma mark -
@@ -286,19 +328,25 @@
 	[formatter setTimeStyle:NSDateFormatterShortStyle];
 	[formatter setDateStyle:NSDateFormatterNoStyle];
 	
-	NSAttributedString *nonMutableString = (NSAttributedString *)[[[sender userInfo] valueForKey:@"AIContentObject"] message];
+	AIContentObject *object = [[sender userInfo] valueForKey:@"AIContentObject"];
 	NSMutableString *string = [[NSMutableString alloc] init];
 	
 	NSRange effectiveRange = NSMakeRange(0, 0);
 	
 	do {
-		NSDictionary *results = [nonMutableString attributesAtIndex:NSMaxRange(effectiveRange) effectiveRange:&effectiveRange];
+		NSDictionary *results = [object.message attributesAtIndex:NSMaxRange(effectiveRange) effectiveRange:&effectiveRange];
 		if ([results objectForKey:NSAttachmentAttributeName])
 			[string appendString:[[results objectForKey:NSAttachmentAttributeName] string]];
 		else
-			[string appendString:[[nonMutableString attributedSubstringFromRange:effectiveRange] string]];
-	} while (NSMaxRange(effectiveRange) < [nonMutableString length]);
+			[string appendString:[[object.message attributedSubstringFromRange:effectiveRange] string]];
+	} while (NSMaxRange(effectiveRange) < [object.message length]);
 	
+	NSString *uniqueID;
+	if (object.chat.isGroupChat)
+		uniqueID = object.chat.uniqueChatID;
+	else
+		uniqueID = [[[sender object] parentContact] internalObjectID];
+		
 	/* NSArray Indexes:
 	 0: Who the message is to
 	 1: The message itself
@@ -307,75 +355,119 @@
 	 4: The Alias of the source
 	 */
 	NSArray * msgArray = [NSArray arrayWithObjects:
-						  [[[sender object] parentContact] internalObjectID],
+						  uniqueID,
 						  string,
-						  [[[sender object] parentContact] displayName],
-						  [formatter stringFromDate:[[[sender userInfo] valueForKey:@"AIContentObject"] date]],
-						  [[[[sender object] parentContact] account] displayName],
+						  (object.chat.isGroupChat) ? object.chat.name : [[[sender object] parentContact] displayName],
+						  [formatter stringFromDate:object.date],
+						  (object.chat.isGroupChat) ? object.chat.account.displayName : [[[[sender object] parentContact] account] displayName],
 						  nil];
 	
 	[formatter release];
 	[string release];
 	
-	[[messageQueueController messageQueue:[[[sender object] parentContact] internalObjectID]] addMessage:msgArray
-																								  ofType:NPAMessageSentFromMac
-																						withRemoteStatus:iPhoneAppIsOpen
-																							   skipQueue:NO];
+	NPMessageQueue *queue = [messageQueueController messageQueue:(object.chat.isGroupChat) ? object.chat.uniqueChatID : [[[sender object] parentContact] internalObjectID]];
+	
+	[queue addMessage:msgArray
+			   ofType:(object.chat.isGroupChat) ? NPAGroupMessageSentFromMac : NPAMessageSentFromMac
+	 withRemoteStatus:iPhoneAppIsOpen
+			skipQueue:NO];
 }
 
 // Receiving messages
-- (void) messageReceived: (id) sender
+- (void) messageReceived: (NSAttributedString *)message inChat: (NSString *) uniqueChatID withTitle: (NSString *) title from: (NSString *) fromAlias atDate: (NSDate *)date
 {
-	//if (!DEPLOY)
-	//	NSLog(@"Message received: %@ - %@", [[sender object] UID], [(NSAttributedString *)[[[sender userInfo] valueForKey:@"AIContentObject"] message] string]);
-
 	NSDateFormatter *formatter = [[NSDateFormatter alloc] init];
 	[formatter setTimeStyle:NSDateFormatterShortStyle];
 	[formatter setDateStyle:NSDateFormatterNoStyle];
 	
-	NSAttributedString *nonMutableString = (NSAttributedString *)[[[sender userInfo] valueForKey:@"AIContentObject"] message];
 	NSMutableString *string = [[NSMutableString alloc] init];
 	
 	NSRange effectiveRange = NSMakeRange(0, 0);
 	
 	do {
-		NSDictionary *results = [nonMutableString attributesAtIndex:NSMaxRange(effectiveRange) effectiveRange:&effectiveRange];
+		NSDictionary *results = [message attributesAtIndex:NSMaxRange(effectiveRange) effectiveRange:&effectiveRange];
 		if ([results objectForKey:NSAttachmentAttributeName])
 			[string appendString:[[results objectForKey:NSAttachmentAttributeName] string]];
 		else
-			[string appendString:[[nonMutableString attributedSubstringFromRange:effectiveRange] string]];
-	} while (NSMaxRange(effectiveRange) < [nonMutableString length]);
+			[string appendString:[[message attributedSubstringFromRange:effectiveRange] string]];
+	} while (NSMaxRange(effectiveRange) < [message length]);
 	
 	/* NSArray Indexes:
-	 0: Who the message is from
+	 0: Who the message is from (or which chat)
 	 1: The message itself (NSString)
 	 2: The Alias of the sender
 	 3: The Time it was sent at
+	 4: The title/name of the chat [only in group chats]
 	 */
 	NSArray * msgArray = [NSArray arrayWithObjects:
-							[[[sender object] parentContact] internalObjectID],
-							string, 
-							[[[sender object] parentContact] displayName],
-							[formatter stringFromDate:[[[sender userInfo] valueForKey:@"AIContentObject"] date]],
-							nil];
+						  uniqueChatID,
+						  string, 
+						  fromAlias,
+						  [formatter stringFromDate:date],
+						  title,
+						  nil];
 	
 	[formatter release];
 	[string release];
 	
-	[[messageQueueController messageQueue:[[[sender object] parentContact] internalObjectID]] addMessage:msgArray
-																								  ofType:NPAMessageReceivedOnMac
-																						withRemoteStatus:iPhoneAppIsOpen
-																							   skipQueue:NO];
+	[[messageQueueController messageQueue:uniqueChatID] addMessage:msgArray
+															ofType:(title != nil) ? NPAGroupMessageReceivedOnMac : NPAMessageReceivedOnMac
+												  withRemoteStatus:iPhoneAppIsOpen
+														 skipQueue:NO];
 	
 	if (!iPhoneAppIsOpen && push)
-		[NSThread detachNewThreadSelector:@selector(push:) toTarget:[NPRemodium class] withObject:[[[sender object] parentContact] displayName]];
+		[NSThread detachNewThreadSelector:@selector(push:) toTarget:[NPRemodium class] withObject:fromAlias];
+}
+
+- (void) messageReceived: (id) sender
+{
+	if (!DEPLOY)
+		NSLog(@"Message received: %@", [[sender userInfo] valueForKey:@"AIContentObject"]);
+	
+	[self messageReceived:(NSAttributedString *)[[[sender userInfo] valueForKey:@"AIContentObject"] message]
+				   inChat:[[[sender object] parentContact] internalObjectID]
+				withTitle:nil
+					 from:[[[sender object] parentContact] displayName]
+				   atDate:[[[sender userInfo] valueForKey:@"AIContentObject"] date]];
+}
+
+- (void) messageReceivedGroup: (id) sender
+{
+	if (!DEPLOY)
+		NSLog(@"Message received: %@", [[[[sender userInfo] valueForKey:@"AIContentObject"] chat] uniqueChatID]);
+	
+	AIContentObject *object = [[sender userInfo] valueForKey:@"AIContentObject"];
+	
+	[self messageReceived:(NSAttributedString *)object.message
+				   inChat:object.chat.uniqueChatID
+				withTitle:object.chat.name
+					 from:object.source.displayName
+				   atDate:object.date];
+}
+
++ (void) sendMessage:(NSString *) message toChat: (NSString *) uniqueChatID
+{
+	AIChat *chat = [adium.chatController existingChatWithUniqueChatID:uniqueChatID];
+	
+	[adium.contentController sendContentObject:[AIContentMessage messageInChat:chat
+																	withSource:chat.account
+																   destination:chat.listObject
+																		  date:[NSDate date]
+																	   message:[[[NSAttributedString alloc] initWithString:message] autorelease]
+																	 autoreply:NO]];
+	
 }
 
 // Send a message to a contact using only information we pass to and from the iPhone
 + (void) sendMessage:(NSString *) message toContact: (NSString *) contactInternalID
 {
 	AIListObject *destinationContact = [[adium contactController] existingListObjectWithUniqueID:contactInternalID];
-	AIChat *chat = [[adium chatController] chatWithContact:(AIListContact *)destinationContact];
+		
+	AIChat *chat;
+	if (destinationContact != nil)
+		chat = [adium.chatController chatWithContact:(AIListContact *)destinationContact];
+	else
+		chat = [adium.chatController existingChatWithUniqueChatID:contactInternalID]; // Guess its a group chat!
 	
 	[[adium contentController] sendContentObject:[AIContentMessage  messageInChat:chat 
 																	   withSource:chat.account
@@ -400,10 +492,15 @@
 			break;
 		case NPAContactListRequest:
 			[messageQueueController.rootQueue addMessage:[NPAdiumPlugin visibleContactsByGroup] ofType:NPAContactList withRemoteStatus:iPhoneAppIsOpen skipQueue:YES];
+			[self statusArrayDidChange:nil];
+			[self statusDidChange:nil];
 			break;
 		case NPAMessagesRequest:
 			// Send any queued messages!
 			[messageQueueController sendMessageQueues];
+			break;
+		case NPAStatusDidChange:
+			[self changeStatus:[[sender object] objectAtIndex:1]];
 			break;
 		default:
 			break;
@@ -499,6 +596,83 @@
 	}
 	
 	return [array autorelease];
+}
+
+#pragma mark -
+#pragma mark AIActionHandler
+/*!
+ * @brief Short description
+ * @result A short localized description of the action
+ */
+- (NSString *)shortDescriptionForActionID:(NSString *)actionID
+{
+	return @"Send a PUSH Notification to Remodium";
+}
+
+/*!
+ * @brief Long description
+ * @result A longer localized description of the action which should take into account the details dictionary as appropraite.
+ */
+- (NSString *)longDescriptionForActionID:(NSString *)actionID withDetails:(NSDictionary *)details
+{
+	return @"Send a PUSH Notification to Remodium";
+}
+
+/*!
+ * @brief Image
+ */
+- (NSImage *)imageForActionID:(NSString *)actionID
+{
+	return [NSImage imageNamed:@"Remodium" forClass:[self class]];
+}
+
+/*!
+ * @brief Details pane
+ * @result An <tt>AIModularPane</tt> to use for configuring this action, or nil if no configuration is possible.
+ */
+- (AIModularPane *)detailsPaneForActionID:(NSString *)actionID
+{
+	return nil;
+}
+
+/*!
+ * @brief Perform an action
+ *
+ * @param actionID The ID of the action to perform
+ * @param listObject The listObject associated with the event triggering the action. It may be nil
+ * @param details If set by the details pane when the action was created, the details dictionary for this particular action
+ * @param eventID The eventID which triggered this action
+ * @param userInfo Additional information associated with the event; userInfo's type will vary with the actionID.
+ *
+ * @result YES if the action was performed successfully.  If NO, other actions of the same type will be attempted even if allowMultipleActionsWithID: returns NO for eventID.
+ */
+- (BOOL)performActionID:(NSString *)actionID forListObject:(AIListObject *)listObject withDetails:(NSDictionary *)details triggeringEventID:(NSString *)eventID userInfo:(id)userInfo
+{	
+	if ([userInfo respondsToSelector:@selector(objectForKey:)]) {
+		AIContentObject *contentObject = [userInfo objectForKey:@"AIContentObject"];
+		if (contentObject.source) {
+			[NSThread detachNewThreadSelector:@selector(push:) toTarget:[NPRemodium class] withObject:contentObject.source.displayName];
+
+		}
+	}
+	
+	return YES;
+}
+
+/*!
+ * @brief Allow multiple actions?
+ *
+ * If this method returns YES, every one of this action associated with the triggering event will be executed.
+ * If this method returns NO, only the first will be.
+ *
+ * Example of relevance: An action which plays a sound may return NO so that if the user has sound actions associated
+ * with the "Message Received (Initial)" and "Message Received" events will hear the "Message Received (Initial)"
+ * sound [which is triggered first] and not the "Message Received" sound when an initial message is received. If this
+ * method returned YES, both sounds would be played.
+ */
+- (BOOL)allowMultipleActionsWithID:(NSString *)actionID
+{
+	return NO;
 }
 
 #pragma mark -

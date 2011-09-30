@@ -14,6 +14,7 @@
 		D46CF16E1172C2D000571920 /* PairCodeEntry.xib in Resources */ = {isa = PBXBuildFile; fileRef = D46CF16D1172C2D000571920 /* PairCodeEntry.xib */; };
 		D46CF1741172C43200571920 /* NPPairCodeEntry.m in Sources */ = {isa = PBXBuildFile; fileRef = D46CF1731172C43200571920 /* NPPairCodeEntry.m */; };
 		D478E382115AC07E00BAF04C /* AIUtilities.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D478E381115AC07E00BAF04C /* AIUtilities.framework */; };
+		D49FEB5D134D2BDB00FD85B9 /* Remodium.png in Resources */ = {isa = PBXBuildFile; fileRef = D49FEB5C134D2BDB00FD85B9 /* Remodium.png */; };
 		D4A9F6D5132968CD0043A231 /* NPRemodium.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D4A9F6D4132968CD0043A231 /* NPRemodium.framework */; };
 		D4A9F6D81329713F0043A231 /* NPRemodium.framework in CopyFiles */ = {isa = PBXBuildFile; fileRef = D4A9F6D4132968CD0043A231 /* NPRemodium.framework */; };
 		D4E82D3A111A8A420073B219 /* Adium.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D41AFC561112533600DF51FF /* Adium.framework */; };
@@ -54,6 +55,7 @@
 		D46CF1721172C43200571920 /* NPPairCodeEntry.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NPPairCodeEntry.h; sourceTree = "<group>"; };
 		D46CF1731172C43200571920 /* NPPairCodeEntry.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NPPairCodeEntry.m; sourceTree = "<group>"; };
 		D478E381115AC07E00BAF04C /* AIUtilities.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = AIUtilities.framework; sourceTree = "<group>"; };
+		D49FEB5C134D2BDB00FD85B9 /* Remodium.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Remodium.png; sourceTree = "<group>"; };
 		D4A9F6D4132968CD0043A231 /* NPRemodium.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = NPRemodium.framework; path = ../../../../../Xcode/Builds/Products/Release/NPRemodium.framework; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -104,6 +106,7 @@
 		089C167CFE841241C02AAC07 /* Resources */ = {
 			isa = PBXGroup;
 			children = (
+				D49FEB5C134D2BDB00FD85B9 /* Remodium.png */,
 				8D5B49B7048680CD000E48DA /* Info.plist */,
 				089C167DFE841241C02AAC07 /* InfoPlist.strings */,
 				D46CF16D1172C2D000571920 /* PairCodeEntry.xib */,
@@ -209,6 +212,7 @@
 			files = (
 				8D5B49B0048680CD000E48DA /* InfoPlist.strings in Resources */,
 				D46CF16E1172C2D000571920 /* PairCodeEntry.xib in Resources */,
+				D49FEB5D134D2BDB00FD85B9 /* Remodium.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

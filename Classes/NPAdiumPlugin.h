@@ -37,6 +37,9 @@
 #import <Adium/AIStatusItem.h>
 #import <Adium/AIMenuControllerProtocol.h>
 #import <Adium/AIMetaContact.h>
+#import <Adium/AIContactAlertsControllerProtocol.h>
+#import <AIUtilities/AIImageAdditions.h>
+
 
 /*
 #import "NPSocketConnection.h"
@@ -62,7 +65,7 @@
  */
 #define LOGTOCONSOLE 2
 
-@interface NPAdiumPlugin : AIPlugin <NSNetServiceBrowserDelegate, NSNetServiceDelegate> {
+@interface NPAdiumPlugin : AIPlugin <AIActionHandler, NSNetServiceDelegate, NSNetServiceBrowserDelegate> {
 	BOOL iPhoneAppIsOpen;
 	BOOL push;
 		
@@ -87,12 +90,14 @@
 - (void) iPhoneAppDidClose: (id) sender;
 
 - (void) statusDidChange: (id) sender;
+- (void) statusArrayDidChange: (id) sender;
 
 + (NSSet *) visibleGroups;
 + (NSArray *) visibleContactsByGroup;
 
 + (NSNumber *) statusTypeAsNSNumber: (AIStatusType) statusType;
 
++ (void) sendMessage:(NSString *) message toChat: (NSString *) uniqueChatID;
 + (void) sendMessage:(NSString *) message toContact: (NSString *) contactInternalID;
 
 - (void) startNetServiceBrowser: (id) sender;
