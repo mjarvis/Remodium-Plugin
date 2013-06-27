@@ -7,14 +7,111 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		D407E12E171CDA2400E567BE /* SocketIO.m in Sources */ = {isa = PBXBuildFile; fileRef = D407E11D171CDA2400E567BE /* SocketIO.m */; };
+		D407E12F171CDA2400E567BE /* SocketIOJSONSerialization.m in Sources */ = {isa = PBXBuildFile; fileRef = D407E11F171CDA2400E567BE /* SocketIOJSONSerialization.m */; };
+		D407E130171CDA2400E567BE /* SocketIOPacket.m in Sources */ = {isa = PBXBuildFile; fileRef = D407E121171CDA2400E567BE /* SocketIOPacket.m */; };
+		D407E131171CDA2400E567BE /* SocketIOTransportWebsocket.m in Sources */ = {isa = PBXBuildFile; fileRef = D407E124171CDA2400E567BE /* SocketIOTransportWebsocket.m */; };
+		D407E132171CDA2400E567BE /* SocketIOTransportXHR.m in Sources */ = {isa = PBXBuildFile; fileRef = D407E126171CDA2400E567BE /* SocketIOTransportXHR.m */; };
+		D407E145171CDCE100E567BE /* SocketRocket.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D407E140171CDCD300E567BE /* SocketRocket.framework */; };
+		D407E147171CDD5700E567BE /* SocketRocket.framework in CopyFiles */ = {isa = PBXBuildFile; fileRef = D407E140171CDCD300E567BE /* SocketRocket.framework */; };
+		D420CA4B1725A3EF0056C71D /* AIContactList+Remodium.m in Sources */ = {isa = PBXBuildFile; fileRef = D420CA4A1725A3EE0056C71D /* AIContactList+Remodium.m */; };
+		D43E67A01724C5EA00A890A9 /* AIListContact+Remodium.m in Sources */ = {isa = PBXBuildFile; fileRef = D43E679F1724C5EA00A890A9 /* AIListContact+Remodium.m */; };
+		D43E67A31724C5FC00A890A9 /* AIListGroup+Remodium.m in Sources */ = {isa = PBXBuildFile; fileRef = D43E67A21724C5FC00A890A9 /* AIListGroup+Remodium.m */; };
+		D43E67A91724D17700A890A9 /* AIChat+Remodium.m in Sources */ = {isa = PBXBuildFile; fileRef = D43E67A81724D17700A890A9 /* AIChat+Remodium.m */; };
+		D43E67BA1724D6B600A890A9 /* BLBSocketController.m in Sources */ = {isa = PBXBuildFile; fileRef = D43E67B91724D6B600A890A9 /* BLBSocketController.m */; };
+		D452D5B4172DD5DE00CD2539 /* BLBPreferencesWindow.m in Sources */ = {isa = PBXBuildFile; fileRef = D452D5B3172DD5DE00CD2539 /* BLBPreferencesWindow.m */; };
+		D452D5B7172DD5F800CD2539 /* BLBPreferencesWindowController.m in Sources */ = {isa = PBXBuildFile; fileRef = D452D5B6172DD5F800CD2539 /* BLBPreferencesWindowController.m */; };
+		D452D5C5172DE3C100CD2539 /* NSObject+Remodium.m in Sources */ = {isa = PBXBuildFile; fileRef = D452D5C4172DE3C100CD2539 /* NSObject+Remodium.m */; };
+		D452D5C7172DE87400CD2539 /* CFNetwork.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D452D5C6172DE87400CD2539 /* CFNetwork.framework */; };
+		D452D5CC172DFC0900CD2539 /* NSLayoutConstraint+Remodium.m in Sources */ = {isa = PBXBuildFile; fileRef = D452D5CB172DFC0900CD2539 /* NSLayoutConstraint+Remodium.m */; };
+		D45E45BF1732366100B7AFD5 /* Remodium.png in Resources */ = {isa = PBXBuildFile; fileRef = D45E45BE1732366100B7AFD5 /* Remodium.png */; };
+		D4792B37172C933B00746941 /* AIStatus+Remodium.m in Sources */ = {isa = PBXBuildFile; fileRef = D4792B36172C933B00746941 /* AIStatus+Remodium.m */; };
 		D4AD4098171BAF450034376A /* Cocoa.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D4AD4097171BAF450034376A /* Cocoa.framework */; };
 		D4AD40B3171BB10A0034376A /* Adium.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D4AD40B1171BB10A0034376A /* Adium.framework */; };
 		D4AD40B4171BB10A0034376A /* AIUtilities.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D4AD40B2171BB10A0034376A /* AIUtilities.framework */; };
-		D4AD40B8171BB1230034376A /* Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = D4AD40B6171BB1230034376A /* Info.plist */; };
 		D4AD40BC171BB1560034376A /* NPAdiumPlugin.m in Sources */ = {isa = PBXBuildFile; fileRef = D4AD40BB171BB1560034376A /* NPAdiumPlugin.m */; };
+		D4E32D8B1724F78800D6AD25 /* AIContentObject+Remodium.m in Sources */ = {isa = PBXBuildFile; fileRef = D4E32D8A1724F78800D6AD25 /* AIContentObject+Remodium.m */; };
 /* End PBXBuildFile section */
 
+/* Begin PBXContainerItemProxy section */
+		D407E13D171CDCD300E567BE /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = D407E136171CDCD300E567BE /* SocketRocket.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = F6B2082D1450F597009315AF;
+			remoteInfo = SocketRocket;
+		};
+		D407E13F171CDCD300E567BE /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = D407E136171CDCD300E567BE /* SocketRocket.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = F668C880153E91210044DBAC;
+			remoteInfo = SocketRocketOSX;
+		};
+		D407E141171CDCD300E567BE /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = D407E136171CDCD300E567BE /* SocketRocket.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = F6BDA802145900D200FE3253;
+			remoteInfo = SRWebSocketTests;
+		};
+		D407E143171CDCD300E567BE /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = D407E136171CDCD300E567BE /* SocketRocket.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = F62417E314D52F3C003CE997;
+			remoteInfo = TestChat;
+		};
+/* End PBXContainerItemProxy section */
+
+/* Begin PBXCopyFilesBuildPhase section */
+		D407E146171CDD4600E567BE /* CopyFiles */ = {
+			isa = PBXCopyFilesBuildPhase;
+			buildActionMask = 2147483647;
+			dstPath = "";
+			dstSubfolderSpec = 10;
+			files = (
+				D407E147171CDD5700E567BE /* SocketRocket.framework in CopyFiles */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXCopyFilesBuildPhase section */
+
 /* Begin PBXFileReference section */
+		D407E11C171CDA2400E567BE /* SocketIO.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SocketIO.h; sourceTree = "<group>"; };
+		D407E11D171CDA2400E567BE /* SocketIO.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SocketIO.m; sourceTree = "<group>"; };
+		D407E11E171CDA2400E567BE /* SocketIOJSONSerialization.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SocketIOJSONSerialization.h; sourceTree = "<group>"; };
+		D407E11F171CDA2400E567BE /* SocketIOJSONSerialization.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SocketIOJSONSerialization.m; sourceTree = "<group>"; };
+		D407E120171CDA2400E567BE /* SocketIOPacket.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SocketIOPacket.h; sourceTree = "<group>"; };
+		D407E121171CDA2400E567BE /* SocketIOPacket.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SocketIOPacket.m; sourceTree = "<group>"; };
+		D407E122171CDA2400E567BE /* SocketIOTransport.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SocketIOTransport.h; sourceTree = "<group>"; };
+		D407E123171CDA2400E567BE /* SocketIOTransportWebsocket.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SocketIOTransportWebsocket.h; sourceTree = "<group>"; };
+		D407E124171CDA2400E567BE /* SocketIOTransportWebsocket.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SocketIOTransportWebsocket.m; sourceTree = "<group>"; };
+		D407E125171CDA2400E567BE /* SocketIOTransportXHR.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SocketIOTransportXHR.h; sourceTree = "<group>"; };
+		D407E126171CDA2400E567BE /* SocketIOTransportXHR.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SocketIOTransportXHR.m; sourceTree = "<group>"; };
+		D407E136171CDCD300E567BE /* SocketRocket.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = SocketRocket.xcodeproj; path = SocketRocket/SocketRocket.xcodeproj; sourceTree = "<group>"; };
+		D420CA491725A3EE0056C71D /* AIContactList+Remodium.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "AIContactList+Remodium.h"; sourceTree = "<group>"; };
+		D420CA4A1725A3EE0056C71D /* AIContactList+Remodium.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "AIContactList+Remodium.m"; sourceTree = "<group>"; };
+		D43E679E1724C5EA00A890A9 /* AIListContact+Remodium.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "AIListContact+Remodium.h"; sourceTree = "<group>"; };
+		D43E679F1724C5EA00A890A9 /* AIListContact+Remodium.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "AIListContact+Remodium.m"; sourceTree = "<group>"; };
+		D43E67A11724C5FC00A890A9 /* AIListGroup+Remodium.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "AIListGroup+Remodium.h"; sourceTree = "<group>"; };
+		D43E67A21724C5FC00A890A9 /* AIListGroup+Remodium.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "AIListGroup+Remodium.m"; sourceTree = "<group>"; };
+		D43E67A71724D17700A890A9 /* AIChat+Remodium.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "AIChat+Remodium.h"; sourceTree = "<group>"; };
+		D43E67A81724D17700A890A9 /* AIChat+Remodium.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "AIChat+Remodium.m"; sourceTree = "<group>"; };
+		D43E67B81724D6B500A890A9 /* BLBSocketController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BLBSocketController.h; sourceTree = "<group>"; };
+		D43E67B91724D6B600A890A9 /* BLBSocketController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BLBSocketController.m; sourceTree = "<group>"; };
+		D452D5B2172DD5DE00CD2539 /* BLBPreferencesWindow.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BLBPreferencesWindow.h; sourceTree = "<group>"; };
+		D452D5B3172DD5DE00CD2539 /* BLBPreferencesWindow.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BLBPreferencesWindow.m; sourceTree = "<group>"; };
+		D452D5B5172DD5F800CD2539 /* BLBPreferencesWindowController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BLBPreferencesWindowController.h; sourceTree = "<group>"; };
+		D452D5B6172DD5F800CD2539 /* BLBPreferencesWindowController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BLBPreferencesWindowController.m; sourceTree = "<group>"; };
+		D452D5C3172DE3C100CD2539 /* NSObject+Remodium.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSObject+Remodium.h"; sourceTree = "<group>"; };
+		D452D5C4172DE3C100CD2539 /* NSObject+Remodium.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSObject+Remodium.m"; sourceTree = "<group>"; };
+		D452D5C6172DE87400CD2539 /* CFNetwork.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CFNetwork.framework; path = System/Library/Frameworks/CFNetwork.framework; sourceTree = SDKROOT; };
+		D452D5CA172DFC0900CD2539 /* NSLayoutConstraint+Remodium.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSLayoutConstraint+Remodium.h"; sourceTree = "<group>"; };
+		D452D5CB172DFC0900CD2539 /* NSLayoutConstraint+Remodium.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSLayoutConstraint+Remodium.m"; sourceTree = "<group>"; };
+		D45E45BE1732366100B7AFD5 /* Remodium.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Remodium.png; sourceTree = "<group>"; };
+		D4792B35172C933B00746941 /* AIStatus+Remodium.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "AIStatus+Remodium.h"; sourceTree = "<group>"; };
+		D4792B36172C933B00746941 /* AIStatus+Remodium.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "AIStatus+Remodium.m"; sourceTree = "<group>"; };
 		D4AD4094171BAF450034376A /* Remodium.AdiumPlugin */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = Remodium.AdiumPlugin; sourceTree = BUILT_PRODUCTS_DIR; };
 		D4AD4097171BAF450034376A /* Cocoa.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Cocoa.framework; path = System/Library/Frameworks/Cocoa.framework; sourceTree = SDKROOT; };
 		D4AD409A171BAF450034376A /* AppKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AppKit.framework; path = System/Library/Frameworks/AppKit.framework; sourceTree = SDKROOT; };
@@ -26,6 +123,9 @@
 		D4AD40B7171BB1230034376A /* Prefix.pch */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Prefix.pch; sourceTree = "<group>"; };
 		D4AD40BA171BB1560034376A /* NPAdiumPlugin.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NPAdiumPlugin.h; sourceTree = "<group>"; };
 		D4AD40BB171BB1560034376A /* NPAdiumPlugin.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NPAdiumPlugin.m; sourceTree = "<group>"; };
+		D4E32D851724F40A00D6AD25 /* BLBMessageDefines.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BLBMessageDefines.h; sourceTree = "<group>"; };
+		D4E32D891724F78800D6AD25 /* AIContentObject+Remodium.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "AIContentObject+Remodium.h"; sourceTree = "<group>"; };
+		D4E32D8A1724F78800D6AD25 /* AIContentObject+Remodium.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "AIContentObject+Remodium.m"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -35,13 +135,78 @@
 			files = (
 				D4AD40B3171BB10A0034376A /* Adium.framework in Frameworks */,
 				D4AD40B4171BB10A0034376A /* AIUtilities.framework in Frameworks */,
+				D452D5C7172DE87400CD2539 /* CFNetwork.framework in Frameworks */,
 				D4AD4098171BAF450034376A /* Cocoa.framework in Frameworks */,
+				D407E145171CDCE100E567BE /* SocketRocket.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		D407E11B171CDA2400E567BE /* SocketIO */ = {
+			isa = PBXGroup;
+			children = (
+				D407E11C171CDA2400E567BE /* SocketIO.h */,
+				D407E11D171CDA2400E567BE /* SocketIO.m */,
+				D407E11E171CDA2400E567BE /* SocketIOJSONSerialization.h */,
+				D407E11F171CDA2400E567BE /* SocketIOJSONSerialization.m */,
+				D407E120171CDA2400E567BE /* SocketIOPacket.h */,
+				D407E121171CDA2400E567BE /* SocketIOPacket.m */,
+				D407E122171CDA2400E567BE /* SocketIOTransport.h */,
+				D407E123171CDA2400E567BE /* SocketIOTransportWebsocket.h */,
+				D407E124171CDA2400E567BE /* SocketIOTransportWebsocket.m */,
+				D407E125171CDA2400E567BE /* SocketIOTransportXHR.h */,
+				D407E126171CDA2400E567BE /* SocketIOTransportXHR.m */,
+			);
+			path = SocketIO;
+			sourceTree = "<group>";
+		};
+		D407E137171CDCD300E567BE /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				D407E13E171CDCD300E567BE /* libSocketRocket.a */,
+				D407E140171CDCD300E567BE /* SocketRocket.framework */,
+				D407E142171CDCD300E567BE /* SRWebSocketTests.octest */,
+				D407E144171CDCD300E567BE /* TestChat.app */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		D43E679D1724C5C500A890A9 /* Categories */ = {
+			isa = PBXGroup;
+			children = (
+				D43E67A71724D17700A890A9 /* AIChat+Remodium.h */,
+				D43E67A81724D17700A890A9 /* AIChat+Remodium.m */,
+				D420CA491725A3EE0056C71D /* AIContactList+Remodium.h */,
+				D420CA4A1725A3EE0056C71D /* AIContactList+Remodium.m */,
+				D4E32D891724F78800D6AD25 /* AIContentObject+Remodium.h */,
+				D4E32D8A1724F78800D6AD25 /* AIContentObject+Remodium.m */,
+				D43E679E1724C5EA00A890A9 /* AIListContact+Remodium.h */,
+				D43E679F1724C5EA00A890A9 /* AIListContact+Remodium.m */,
+				D43E67A11724C5FC00A890A9 /* AIListGroup+Remodium.h */,
+				D43E67A21724C5FC00A890A9 /* AIListGroup+Remodium.m */,
+				D4792B35172C933B00746941 /* AIStatus+Remodium.h */,
+				D4792B36172C933B00746941 /* AIStatus+Remodium.m */,
+				D452D5CA172DFC0900CD2539 /* NSLayoutConstraint+Remodium.h */,
+				D452D5CB172DFC0900CD2539 /* NSLayoutConstraint+Remodium.m */,
+				D452D5C3172DE3C100CD2539 /* NSObject+Remodium.h */,
+				D452D5C4172DE3C100CD2539 /* NSObject+Remodium.m */,
+			);
+			path = Categories;
+			sourceTree = "<group>";
+		};
+		D452D5AD172DD5C800CD2539 /* Preferences */ = {
+			isa = PBXGroup;
+			children = (
+				D452D5B2172DD5DE00CD2539 /* BLBPreferencesWindow.h */,
+				D452D5B3172DD5DE00CD2539 /* BLBPreferencesWindow.m */,
+				D452D5B5172DD5F800CD2539 /* BLBPreferencesWindowController.h */,
+				D452D5B6172DD5F800CD2539 /* BLBPreferencesWindowController.m */,
+			);
+			path = Preferences;
+			sourceTree = "<group>";
+		};
 		D4AD408B171BAF450034376A = {
 			isa = PBXGroup;
 			children = (
@@ -62,8 +227,10 @@
 		D4AD4096171BAF450034376A /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				D407E136171CDCD300E567BE /* SocketRocket.xcodeproj */,
 				D4AD40B1171BB10A0034376A /* Adium.framework */,
 				D4AD40B2171BB10A0034376A /* AIUtilities.framework */,
+				D452D5C6172DE87400CD2539 /* CFNetwork.framework */,
 				D4AD4097171BAF450034376A /* Cocoa.framework */,
 				D4AD4099171BAF450034376A /* Other Frameworks */,
 			);
@@ -92,8 +259,10 @@
 		D4AD40B5171BB1230034376A /* Supporting Files */ = {
 			isa = PBXGroup;
 			children = (
+				D4E32D851724F40A00D6AD25 /* BLBMessageDefines.h */,
 				D4AD40B6171BB1230034376A /* Info.plist */,
 				D4AD40B7171BB1230034376A /* Prefix.pch */,
+				D45E45BE1732366100B7AFD5 /* Remodium.png */,
 			);
 			path = "Supporting Files";
 			sourceTree = "<group>";
@@ -103,6 +272,11 @@
 			children = (
 				D4AD40BA171BB1560034376A /* NPAdiumPlugin.h */,
 				D4AD40BB171BB1560034376A /* NPAdiumPlugin.m */,
+				D43E67B81724D6B500A890A9 /* BLBSocketController.h */,
+				D43E67B91724D6B600A890A9 /* BLBSocketController.m */,
+				D43E679D1724C5C500A890A9 /* Categories */,
+				D452D5AD172DD5C800CD2539 /* Preferences */,
+				D407E11B171CDA2400E567BE /* SocketIO */,
 			);
 			path = Classes;
 			sourceTree = "<group>";
@@ -117,6 +291,7 @@
 				D4AD4090171BAF450034376A /* Sources */,
 				D4AD4091171BAF450034376A /* Frameworks */,
 				D4AD4092171BAF450034376A /* Resources */,
+				D407E146171CDD4600E567BE /* CopyFiles */,
 			);
 			buildRules = (
 			);
@@ -147,6 +322,12 @@
 			mainGroup = D4AD408B171BAF450034376A;
 			productRefGroup = D4AD4095171BAF450034376A /* Products */;
 			projectDirPath = "";
+			projectReferences = (
+				{
+					ProductGroup = D407E137171CDCD300E567BE /* Products */;
+					ProjectRef = D407E136171CDCD300E567BE /* SocketRocket.xcodeproj */;
+				},
+			);
 			projectRoot = "";
 			targets = (
 				D4AD4093171BAF450034376A /* Remodium */,
@@ -154,12 +335,43 @@
 		};
 /* End PBXProject section */
 
+/* Begin PBXReferenceProxy section */
+		D407E13E171CDCD300E567BE /* libSocketRocket.a */ = {
+			isa = PBXReferenceProxy;
+			fileType = archive.ar;
+			path = libSocketRocket.a;
+			remoteRef = D407E13D171CDCD300E567BE /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+		D407E140171CDCD300E567BE /* SocketRocket.framework */ = {
+			isa = PBXReferenceProxy;
+			fileType = wrapper.framework;
+			path = SocketRocket.framework;
+			remoteRef = D407E13F171CDCD300E567BE /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+		D407E142171CDCD300E567BE /* SRWebSocketTests.octest */ = {
+			isa = PBXReferenceProxy;
+			fileType = wrapper.cfbundle;
+			path = SRWebSocketTests.octest;
+			remoteRef = D407E141171CDCD300E567BE /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+		D407E144171CDCD300E567BE /* TestChat.app */ = {
+			isa = PBXReferenceProxy;
+			fileType = wrapper.application;
+			path = TestChat.app;
+			remoteRef = D407E143171CDCD300E567BE /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+/* End PBXReferenceProxy section */
+
 /* Begin PBXResourcesBuildPhase section */
 		D4AD4092171BAF450034376A /* Resources */ = {
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				D4AD40B8171BB1230034376A /* Info.plist in Resources */,
+				D45E45BF1732366100B7AFD5 /* Remodium.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -171,6 +383,22 @@
 			buildActionMask = 2147483647;
 			files = (
 				D4AD40BC171BB1560034376A /* NPAdiumPlugin.m in Sources */,
+				D407E12E171CDA2400E567BE /* SocketIO.m in Sources */,
+				D407E12F171CDA2400E567BE /* SocketIOJSONSerialization.m in Sources */,
+				D407E130171CDA2400E567BE /* SocketIOPacket.m in Sources */,
+				D407E131171CDA2400E567BE /* SocketIOTransportWebsocket.m in Sources */,
+				D407E132171CDA2400E567BE /* SocketIOTransportXHR.m in Sources */,
+				D43E67A01724C5EA00A890A9 /* AIListContact+Remodium.m in Sources */,
+				D43E67A31724C5FC00A890A9 /* AIListGroup+Remodium.m in Sources */,
+				D43E67A91724D17700A890A9 /* AIChat+Remodium.m in Sources */,
+				D43E67BA1724D6B600A890A9 /* BLBSocketController.m in Sources */,
+				D4E32D8B1724F78800D6AD25 /* AIContentObject+Remodium.m in Sources */,
+				D420CA4B1725A3EF0056C71D /* AIContactList+Remodium.m in Sources */,
+				D4792B37172C933B00746941 /* AIStatus+Remodium.m in Sources */,
+				D452D5B4172DD5DE00CD2539 /* BLBPreferencesWindow.m in Sources */,
+				D452D5B7172DD5F800CD2539 /* BLBPreferencesWindowController.m in Sources */,
+				D452D5C5172DE3C100CD2539 /* NSObject+Remodium.m in Sources */,
+				D452D5CC172DFC0900CD2539 /* NSLayoutConstraint+Remodium.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -239,6 +467,7 @@
 		D4AD40A7171BAF460034376A /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				ARCHS = "$(ARCHS_STANDARD_32_64_BIT)";
 				COMBINE_HIDPI_IMAGES = YES;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
@@ -249,6 +478,8 @@
 				GCC_PREFIX_HEADER = "Remodium/Supporting Files/Prefix.pch";
 				INFOPLIST_FILE = "Remodium/Supporting Files/Info.plist";
 				INSTALL_PATH = "$(HOME)/Library/Application Support/Adium 2.0/PlugIns/";
+				MACOSX_DEPLOYMENT_TARGET = 10.7;
+				OTHER_LDFLAGS = "-ObjC";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				WRAPPER_EXTENSION = AdiumPlugin;
 			};
@@ -257,6 +488,7 @@
 		D4AD40A8171BAF460034376A /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				ARCHS = "$(ARCHS_STANDARD_32_64_BIT)";
 				COMBINE_HIDPI_IMAGES = YES;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
@@ -267,6 +499,8 @@
 				GCC_PREFIX_HEADER = "Remodium/Supporting Files/Prefix.pch";
 				INFOPLIST_FILE = "Remodium/Supporting Files/Info.plist";
 				INSTALL_PATH = "$(HOME)/Library/Application Support/Adium 2.0/PlugIns/";
+				MACOSX_DEPLOYMENT_TARGET = 10.7;
+				OTHER_LDFLAGS = "-ObjC";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				WRAPPER_EXTENSION = AdiumPlugin;
 			};

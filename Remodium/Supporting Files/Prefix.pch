@@ -7,3 +7,5 @@
     #import <Adium/AISharedAdium.h>
     #import <AIUtilities/AIStringUtilities.h>
 #endif
+
+#import "NSObject+Remodium.h"
