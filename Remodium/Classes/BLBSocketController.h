@@ -25,6 +25,8 @@
 @property (nonatomic, readonly) BOOL connected;
 @property (nonatomic, readonly) BOOL authenticated;
 
+@property (nonatomic, strong) NSData *sharedKeyHash;
+
 @property (nonatomic, weak) id<BLBSocketControllerDelegate> delegate;
 
 + (BLBSocketController *)sharedController;

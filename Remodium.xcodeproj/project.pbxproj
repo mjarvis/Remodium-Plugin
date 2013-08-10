@@ -15,6 +15,8 @@
 		D407E145171CDCE100E567BE /* SocketRocket.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D407E140171CDCD300E567BE /* SocketRocket.framework */; };
 		D407E147171CDD5700E567BE /* SocketRocket.framework in CopyFiles */ = {isa = PBXBuildFile; fileRef = D407E140171CDCD300E567BE /* SocketRocket.framework */; };
 		D420CA4B1725A3EF0056C71D /* AIContactList+Remodium.m in Sources */ = {isa = PBXBuildFile; fileRef = D420CA4A1725A3EE0056C71D /* AIContactList+Remodium.m */; };
+		D4360B2017B70D18007A489D /* NSData+BLB.m in Sources */ = {isa = PBXBuildFile; fileRef = D4360B1F17B70D18007A489D /* NSData+BLB.m */; };
+		D4360B2717B70D1F007A489D /* NSString+Remodium.m in Sources */ = {isa = PBXBuildFile; fileRef = D4360B2617B70D1F007A489D /* NSString+Remodium.m */; };
 		D43E67A01724C5EA00A890A9 /* AIListContact+Remodium.m in Sources */ = {isa = PBXBuildFile; fileRef = D43E679F1724C5EA00A890A9 /* AIListContact+Remodium.m */; };
 		D43E67A31724C5FC00A890A9 /* AIListGroup+Remodium.m in Sources */ = {isa = PBXBuildFile; fileRef = D43E67A21724C5FC00A890A9 /* AIListGroup+Remodium.m */; };
 		D43E67A91724D17700A890A9 /* AIChat+Remodium.m in Sources */ = {isa = PBXBuildFile; fileRef = D43E67A81724D17700A890A9 /* AIChat+Remodium.m */; };
@@ -92,6 +94,10 @@
 		D407E136171CDCD300E567BE /* SocketRocket.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = SocketRocket.xcodeproj; path = SocketRocket/SocketRocket.xcodeproj; sourceTree = "<group>"; };
 		D420CA491725A3EE0056C71D /* AIContactList+Remodium.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "AIContactList+Remodium.h"; sourceTree = "<group>"; };
 		D420CA4A1725A3EE0056C71D /* AIContactList+Remodium.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "AIContactList+Remodium.m"; sourceTree = "<group>"; };
+		D4360B1E17B70D18007A489D /* NSData+BLB.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSData+BLB.h"; sourceTree = "<group>"; };
+		D4360B1F17B70D18007A489D /* NSData+BLB.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSData+BLB.m"; sourceTree = "<group>"; };
+		D4360B2517B70D1F007A489D /* NSString+Remodium.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSString+Remodium.h"; sourceTree = "<group>"; };
+		D4360B2617B70D1F007A489D /* NSString+Remodium.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSString+Remodium.m"; sourceTree = "<group>"; };
 		D43E679E1724C5EA00A890A9 /* AIListContact+Remodium.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "AIListContact+Remodium.h"; sourceTree = "<group>"; };
 		D43E679F1724C5EA00A890A9 /* AIListContact+Remodium.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "AIListContact+Remodium.m"; sourceTree = "<group>"; };
 		D43E67A11724C5FC00A890A9 /* AIListGroup+Remodium.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "AIListGroup+Remodium.h"; sourceTree = "<group>"; };
@@ -188,10 +194,14 @@
 				D43E67A21724C5FC00A890A9 /* AIListGroup+Remodium.m */,
 				D4792B35172C933B00746941 /* AIStatus+Remodium.h */,
 				D4792B36172C933B00746941 /* AIStatus+Remodium.m */,
+				D4360B1E17B70D18007A489D /* NSData+BLB.h */,
+				D4360B1F17B70D18007A489D /* NSData+BLB.m */,
 				D452D5CA172DFC0900CD2539 /* NSLayoutConstraint+Remodium.h */,
 				D452D5CB172DFC0900CD2539 /* NSLayoutConstraint+Remodium.m */,
 				D452D5C3172DE3C100CD2539 /* NSObject+Remodium.h */,
 				D452D5C4172DE3C100CD2539 /* NSObject+Remodium.m */,
+				D4360B2517B70D1F007A489D /* NSString+Remodium.h */,
+				D4360B2617B70D1F007A489D /* NSString+Remodium.m */,
 			);
 			path = Categories;
 			sourceTree = "<group>";
@@ -399,6 +409,8 @@
 				D452D5B7172DD5F800CD2539 /* BLBPreferencesWindowController.m in Sources */,
 				D452D5C5172DE3C100CD2539 /* NSObject+Remodium.m in Sources */,
 				D452D5CC172DFC0900CD2539 /* NSLayoutConstraint+Remodium.m in Sources */,
+				D4360B2017B70D18007A489D /* NSData+BLB.m in Sources */,
+				D4360B2717B70D1F007A489D /* NSString+Remodium.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

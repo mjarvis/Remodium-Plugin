@@ -10,6 +10,8 @@
 #import "SocketIO.h"
 #import "SocketIOPacket.h"
 
+#import "NSData+BLB.h"
+
 @interface BLBSocketController () <SocketIODelegate>
 
 @property (nonatomic, strong) SocketIO *socket;
@@ -77,10 +79,22 @@
         contents = @"";
     }
     
-    NSDictionary *data = @{
-                           @"message": message,
-                           @"contents": contents,
-                           };
+    NSDictionary *dictionary = @{
+                                 @"message": message,
+                                 @"contents": contents,
+                                 };
+    
+    NSData *json = [NSJSONSerialization dataWithJSONObject:dictionary
+                                                   options:0
+                                                     error:nil];
+    
+    if (self.sharedKeyHash)
+    {
+        json = [json blb_AES256EncryptWithKey:self.sharedKeyHash];
+    }
+    
+    NSString *data = [[NSString alloc] initWithData:json
+                                           encoding:NSUTF8StringEncoding];
     
     if (response)
     {
@@ -152,9 +166,26 @@
     if ([packet.name isEqualToString:@"relay"])
     {
         // Relay event!
-        NSDictionary *dictionary = [packet.args lastObject];
+        NSString *string = [packet.args lastObject];
         
-        if (dictionary == nil)
+        if ([string length] == 0)
+        {
+            NSLog(@"BLBSocketController relay with no contents");
+            return;
+        }
+        
+        NSData *data = [string dataUsingEncoding:NSUTF8StringEncoding];
+        
+        if (self.sharedKeyHash)
+        {
+            data = [data blb_AES256DecryptWithKey:self.sharedKeyHash];
+        }
+        
+        NSDictionary *dictionary = [NSJSONSerialization JSONObjectWithData:data
+                                                                   options:0
+                                                                     error:NULL];
+        
+        if ([dictionary count] != 2)
         {
             NSLog(@"BLBSocketController relay with no arguments");
             return;
@@ -163,13 +194,13 @@
         NSString *message = dictionary[@"message"];
         id contents = dictionary[@"contents"];
         
-        id data = [self.delegate respondToMessage:message
+        id responseData = [self.delegate respondToMessage:message
                                          contents:contents];
         
-        if (data)
+        if (responseData)
         {
             [socket sendAcknowledgement:packet.pId
-                               withArgs:@[data]];
+                               withArgs:@[responseData]];
         }
     }
 }
