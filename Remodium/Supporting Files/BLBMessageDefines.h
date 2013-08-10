@@ -6,18 +6,18 @@
 //  Copyright (c) 2013 Boolable. All rights reserved.
 //
 
-typedef NSString BLBMessage;
+typedef NSString BLBMessageKey;
 
-static BLBMessage *BLBMessageContactList        = @"contacts";
-static BLBMessage *BLBMessageContactStatus      = @"contact_status";
+static BLBMessageKey *BLBMessageKeyContactList        = @"contacts";
+static BLBMessageKey *BLBMessageKeyContactStatus      = @"contact_status";
 
-static BLBMessage *BLBMessageChat               = @"chat";
-static BLBMessage *BLBMessageChatList           = @"chats";
-static BLBMessage *BLBMessageChatMessages       = @"chat_messages";
-static BLBMessage *BLBMessageChatClose          = @"chat_close";
-static BLBMessage *BLBMessageChatClearUnread    = @"chat_clear_unread";
+static BLBMessageKey *BLBMessageKeyChat               = @"chat";
+static BLBMessageKey *BLBMessageKeyChatList           = @"chats";
+static BLBMessageKey *BLBMessageKeyChatMessages       = @"chat_messages";
+static BLBMessageKey *BLBMessageKeyChatClose          = @"chat_close";
+static BLBMessageKey *BLBMessageKeyChatClearUnread    = @"chat_clear_unread";
 
-static BLBMessage *BLBMessageMessage            = @"message";
+static BLBMessageKey *BLBMessageKeyMessage            = @"message";
 
-static BLBMessage *BLBMessageStatusList         = @"status_list";
-static BLBMessage *BLBMessageStatus             = @"status";
+static BLBMessageKey *BLBMessageKeyStatusList         = @"status_list";
+static BLBMessageKey *BLBMessageKeyStatus             = @"status";

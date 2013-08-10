@@ -124,7 +124,7 @@
     
     NSDictionary *dictionary = chat.blb_dictionaryRepresentation;
     
-    [[BLBSocketController sharedController] relayMessage:BLBMessageChat
+    [[BLBSocketController sharedController] relayMessage:BLBMessageKeyChat
                                                 contents:dictionary
                                                 response:NULL];
 }
@@ -135,7 +135,7 @@
     
     NSDictionary *dictionary = chat.blb_dictionaryRepresentation;
     
-    [[BLBSocketController sharedController] relayMessage:BLBMessageChatClose
+    [[BLBSocketController sharedController] relayMessage:BLBMessageKeyChatClose
                                                 contents:dictionary
                                                 response:NULL];
 }
@@ -151,7 +151,7 @@
     
     NSDictionary *dictionary = contentObject.blb_dictionaryRepresentation;
     
-    [[BLBSocketController sharedController] relayMessage:BLBMessageMessage
+    [[BLBSocketController sharedController] relayMessage:BLBMessageKeyMessage
                                                 contents:dictionary
                                                 response:NULL];
     
@@ -164,7 +164,7 @@
     
     NSDictionary *dictionary = status.blb_dictionaryRepresentation;
     
-    [[BLBSocketController sharedController] relayMessage:BLBMessageStatus
+    [[BLBSocketController sharedController] relayMessage:BLBMessageKeyStatus
                                                 contents:dictionary
                                                 response:NULL];
 }
@@ -175,7 +175,7 @@
     
     NSArray *array = [statuses valueForKey:@"blb_dictionaryRepresentation"];
     
-    [[BLBSocketController sharedController] relayMessage:BLBMessageStatusList
+    [[BLBSocketController sharedController] relayMessage:BLBMessageKeyStatusList
                                                 contents:array
                                                 response:NULL];
 }
@@ -186,7 +186,7 @@
     
     NSDictionary *dictionary = contact.blb_dictionaryRepresentation;
     
-    [[BLBSocketController sharedController] relayMessage:BLBMessageContactStatus
+    [[BLBSocketController sharedController] relayMessage:BLBMessageKeyContactStatus
                                                 contents:dictionary
                                                 response:NULL];
 }
@@ -197,7 +197,7 @@
     
     NSDictionary *dictionary = contactList.blb_dictionaryRepresentation;
     
-    [[BLBSocketController sharedController] relayMessage:BLBMessageContactList
+    [[BLBSocketController sharedController] relayMessage:BLBMessageKeyContactList
                                                 contents:dictionary
                                                 response:NULL];
 }
@@ -207,32 +207,32 @@
 - (id)respondToMessage:(NSString *)message contents:(id)contents
 {
     // Contacts
-    if ([message isEqualToString:BLBMessageContactList])
+    if ([message isEqualToString:BLBMessageKeyContactList])
     {
         return [adium contactController].contactList.blb_dictionaryRepresentation;
     }
     
     // Statuses
-    else if ([message isEqualToString:BLBMessageStatusList])
+    else if ([message isEqualToString:BLBMessageKeyStatusList])
     {
         NSArray *statuses = [[adium statusController].sortedFullStateArray valueForKey:@"blb_dictionaryRepresentation"];
         
         return statuses ?: @[];
     }
-    else if ([message isEqualToString:BLBMessageStatus])
+    else if ([message isEqualToString:BLBMessageKeyStatus])
     {
         AIStatus *status = [adium.statusController statusStateWithUniqueStatusID:contents[@"identifier"]];
         [adium.statusController setActiveStatusState:status];
     }
     
     // Chats
-    else if ([message isEqualToString:BLBMessageChatList])
+    else if ([message isEqualToString:BLBMessageKeyChatList])
     {
         NSArray *chats = [[[adium chatController].openChats valueForKey:@"blb_dictionaryRepresentation"] allObjects];
         
         return chats ?: @[];
     }
-    else if ([message isEqualToString:BLBMessageChatMessages])
+    else if ([message isEqualToString:BLBMessageKeyChatMessages])
     {
         NSString *chatIdentifier = contents[@"chat"][@"identifier"];
         NSNumber *index = contents[@"range"][@"index"];
@@ -245,7 +245,7 @@
         
         return messages ?: @[];
     }
-    else if ([message isEqualToString:BLBMessageChat])
+    else if ([message isEqualToString:BLBMessageKeyChat])
     {
         NSString *contactIdentifier = contents[@"contact"][@"identifier"];
         
@@ -255,7 +255,7 @@
         
         return chat.blb_dictionaryRepresentation;
     }
-    else if ([message isEqualToString:BLBMessageChatClearUnread])
+    else if ([message isEqualToString:BLBMessageKeyChatClearUnread])
     {
         NSString *chatIdentifier = contents[@"chat"][@"identifier"];
         
@@ -267,7 +267,7 @@
     }
     
     // Messages
-    else if ([message isEqualToString:BLBMessageMessage])
+    else if ([message isEqualToString:BLBMessageKeyMessage])
     {
         NSString *chatIdentifier = contents[@"chat"];
         
